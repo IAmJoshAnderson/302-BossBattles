@@ -5,11 +5,17 @@ using UnityEngine;
 public class FootRaycast : MonoBehaviour
 {
 
-    public float raycastLength = 2;
-    private float distanceBetweenGroundAndIK;
-    private Quaternion startingRot; // has to be local rotation to the player, since the player can influence its rotation. If it's global, the feet will never rotate.
-    
+    public float raycastLength = 2; // Total length of the raycast in meters
 
+    /// <summary>
+    /// The local-space position of where the IK spawned
+    /// </summary>
+
+    private Vector3 startingPosition;
+    /// <summary>
+    /// The local-space rotation of where the IK spawned
+    /// </summary>
+    private Quaternion startingRotation; // has to be local rotation to the player, since the player can influence its rotation. If it's global, the feet will never rotate.
     /// <summary>
     /// The world-space position of the ground above/below the foot IK.
     /// </summary>
@@ -20,16 +26,42 @@ public class FootRaycast : MonoBehaviour
     /// </summary>
     private Quaternion groundRotation;
 
+    /// <summary>
+    /// This allows us to ease the position!
+    /// </summary>
+    private Vector3 targetPosition;
+    private Vector3 footSeparateDir;
+
     void Start()
     {
-        startingRot = transform.localRotation;
-        distanceBetweenGroundAndIK = transform.localPosition.y;
+        startingRotation = transform.localRotation;
+        startingPosition = transform.localPosition;
+
+        footSeparateDir = (startingPosition.x > 0) ? Vector3.right : Vector3.left;
     }
 
     void Update()
     {
         //FindGround();
+
+        // ease towards target:
+        transform.localPosition = AnimMath.Ease(transform.localPosition, targetPosition, .01f);
     }
+
+    public void SetPositionLocal(Vector3 p)
+    {
+        targetPosition = p;
+    }
+    public void SetPositionHome()
+    {
+        targetPosition = startingPosition;
+    }
+
+    public void SetPositionOffset(Vector3 p, float separateAmount = 0)
+    {
+        targetPosition = startingPosition + p + separateAmount * footSeparateDir;
+    }
+
 
     private void FindGround()
     {
@@ -44,10 +76,10 @@ public class FootRaycast : MonoBehaviour
 
         if (Physics.Raycast(origin, direction, out hitInfo, raycastLength)) // if we hit the ground with the raycast
         {
-            groundPosition = hitInfo.point + Vector3.up * distanceBetweenGroundAndIK; // change the position of the IK constraint
+            groundPosition = hitInfo.point + Vector3.up * startingPosition.y; // change the position of the IK constraint
 
             //Rotation
-            Quaternion worldNeutral = transform.parent.rotation * startingRot; // turns back from local into global for the fromtorotation function
+            Quaternion worldNeutral = transform.parent.rotation * startingRotation; // turns back from local into global for the fromtorotation function
             groundRotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal) * worldNeutral;
 
         }
