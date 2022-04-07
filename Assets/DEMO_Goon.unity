@@ -392,6 +392,10 @@ PrefabInstance:
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 337435610, guid: fe88328fc856bf4479a7b82f9aaff990, type: 3}
+      propertyPath: jumpImpulse
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 337435610, guid: fe88328fc856bf4479a7b82f9aaff990, type: 3}
       propertyPath: footSeparateAmount
       value: -0.2
       objectReference: {fileID: 0}

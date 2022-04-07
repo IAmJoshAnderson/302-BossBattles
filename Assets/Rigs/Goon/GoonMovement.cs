@@ -67,17 +67,25 @@ public class GoonMovement : MonoBehaviour
 
         if (mode == Mode.Walk) targetRotation = Quaternion.LookRotation(input, Vector3.up); // turning the player back and forth, no strafing.
 
+        if (pawn.isGrounded)
+        {
+            if (Input.GetButtonDown("Jump"))
+            {
+                velocityY = -jumpImpulse;
+            }
+        }
         velocityY += gravity * Time.deltaTime;
 
         pawn.Move((input * speed + Vector3.down * velocityY) * Time.deltaTime); //pawn.SimpleMove(Input * speed) is for no jump
 
-       // if (pawn.isGrounded)
-        //{
-            //if (Input.GetButtonDown("Jump"))
-            //{
-                //velocityY = -jumpImpulse;
-            //}
-        //}
+        if (pawn.isGrounded)
+        {
+            velocityY = 0;
+        }
+        else
+        {
+            mode = Mode.InAir;
+        }
 
 
         // animate the feet
