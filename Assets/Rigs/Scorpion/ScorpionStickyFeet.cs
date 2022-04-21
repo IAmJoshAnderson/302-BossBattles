@@ -38,7 +38,6 @@ public class ScorpionStickyFeet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startingPosition = transform.localPosition;
         startingRotation = transform.localRotation;
     }
 
@@ -66,7 +65,7 @@ public class ScorpionStickyFeet : MonoBehaviour
             transform.rotation = groundRotation;
 
             //check distance to starting position, trigger animation
-            Vector3 vToStarting = transform.position - transform.parent.TransformPoint(startingPosition);
+            Vector3 vToStarting = transform.position - rayCastSource.position;
             if (vToStarting.sqrMagnitude > maxDistanceBeforeMove * maxDistanceBeforeMove)
             {
                 FindGround();
@@ -85,8 +84,8 @@ public class ScorpionStickyFeet : MonoBehaviour
 
         if (Physics.Raycast(origin, direction, out RaycastHit hitInfo, raycastLength)) // if we hit the ground with the raycast
         {
+
             //prepare animation values
-            animationCurrentTime = 0;
             previousGroundPosition = groundPosition;
                 previousGroundRotation = groundRotation;
 
@@ -97,8 +96,7 @@ public class ScorpionStickyFeet : MonoBehaviour
             Quaternion worldNeutral = transform.parent.rotation * startingRotation;
 
             groundRotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal) * worldNeutral;
-
-
+            animationCurrentTime = 0;
         }
     }
 }

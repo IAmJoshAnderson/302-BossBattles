@@ -1,0 +1,131 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LowerBody
+  m_Mask: 01000000000000000000000001000000010000000000000000000000000000000000000001000000010000000000000000000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 1
+  - m_Path: Armature/Feet.L
+    m_Weight: 1
+  - m_Path: Armature/Feet.L/Toe.L
+    m_Weight: 1
+  - m_Path: Armature/Feet.L/Toe.L/Toe.L_end
+    m_Weight: 1
+  - m_Path: Armature/Feet.R
+    m_Weight: 1
+  - m_Path: Armature/Feet.R/Toe.R
+    m_Weight: 1
+  - m_Path: Armature/Feet.R/Toe.R/Toe.R_end
+    m_Weight: 1
+  - m_Path: Armature/IK.L
+    m_Weight: 0
+  - m_Path: Armature/IK.L/Pole.L
+    m_Weight: 1
+  - m_Path: Armature/IK.L/Pole.L/Pole.L_end
+    m_Weight: 1
+  - m_Path: Armature/IK.R
+    m_Weight: 0
+  - m_Path: Armature/IK.R/Pole.R
+    m_Weight: 1
+  - m_Path: Armature/IK.R/Pole.R/Pole.R_end
+    m_Weight: 1
+  - m_Path: Armature/Root
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Pelvis.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Pelvis.L/UpperLeg.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Pelvis.L/UpperLeg.L/LowerLeg.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Pelvis.L/UpperLeg.L/LowerLeg.L/LowerLeg.L_end
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Pelvis.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Pelvis.R/UpperLeg.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Pelvis.R/UpperLeg.R/LowerLeg.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Pelvis.R/UpperLeg.R/LowerLeg.R/LowerLeg.R_end
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001
+    m_Weight: 0
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Head
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Head/Head_end
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.l
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.l/UpperArm.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.l/UpperArm.L/LowerArm.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.l/UpperArm.L/LowerArm.L/Hand.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.l/UpperArm.L/LowerArm.L/Hand.L/FingersBase.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.l/UpperArm.L/LowerArm.L/Hand.L/FingersBase.L/FingersTip.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.l/UpperArm.L/LowerArm.L/Hand.L/FingersBase.L/FingersTip.L/FingersTip.L_end
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.l/UpperArm.L/LowerArm.L/Hand.L/IndexFingerBase.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.l/UpperArm.L/LowerArm.L/Hand.L/IndexFingerBase.L/IndexFingerTip.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.l/UpperArm.L/LowerArm.L/Hand.L/IndexFingerBase.L/IndexFingerTip.L/IndexFingerTip.L_end
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.l/UpperArm.L/LowerArm.L/Hand.L/ThumbBase.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.l/UpperArm.L/LowerArm.L/Hand.L/ThumbBase.L/ThumbTip.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.l/UpperArm.L/LowerArm.L/Hand.L/ThumbBase.L/ThumbTip.L/ThumbTip.L_end
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.r
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.r/UpperArm.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.r/UpperArm.R/LowerArm.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.r/UpperArm.R/LowerArm.R/Hand.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.r/UpperArm.R/LowerArm.R/Hand.R/FingersBase.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.r/UpperArm.R/LowerArm.R/Hand.R/FingersBase.R/FingersTip.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.r/UpperArm.R/LowerArm.R/Hand.R/FingersBase.R/FingersTip.R/FingersTip.R_end
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.r/UpperArm.R/LowerArm.R/Hand.R/Gun
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.r/UpperArm.R/LowerArm.R/Hand.R/Gun/Mag
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.r/UpperArm.R/LowerArm.R/Hand.R/Gun/Mag/Mag_end
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.r/UpperArm.R/LowerArm.R/Hand.R/IndexFingerBase.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.r/UpperArm.R/LowerArm.R/Hand.R/IndexFingerBase.R/IndexFingerTip.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.r/UpperArm.R/LowerArm.R/Hand.R/IndexFingerBase.R/IndexFingerTip.R/IndexFingerTip.R_end
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.r/UpperArm.R/LowerArm.R/Hand.R/ThumbBase.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.r/UpperArm.R/LowerArm.R/Hand.R/ThumbBase.R/ThumbTip.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis/Spine001/Spine002/Torso/Shoulder.r/UpperArm.R/LowerArm.R/Hand.R/ThumbBase.R/ThumbTip.R/ThumbTip.R_end
+    m_Weight: 1
+  - m_Path: Robot
+    m_Weight: 0
+  - m_Path: Weapon
+    m_Weight: 0

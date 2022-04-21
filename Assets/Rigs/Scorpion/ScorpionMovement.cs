@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//[RequireComponent](typeof(CharacterController))]
+[RequireComponent(typeof(CharacterController))]
 public class ScorpionMovement : MonoBehaviour
 {
     enum Mode
@@ -14,6 +14,9 @@ public class ScorpionMovement : MonoBehaviour
     }
 
     public float speed = 2;
+    public Transform groundRing;
+
+    public ScorpionStickyFeet[] feet;
 
     private CharacterController pawn;
 
@@ -39,7 +42,9 @@ public class ScorpionMovement : MonoBehaviour
     }
 
     void Update()
-    { 
+    {
+        GetPlayerInputRelativeToCamera();
+
         // set movement mode based on movement input:
         float threshold = .1f;
         mode = (input.sqrMagnitude > threshold * threshold) ? Mode.Walk : Mode.Idle;

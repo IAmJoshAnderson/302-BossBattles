@@ -2,18 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Animator))]
 public class GuyMovement : MonoBehaviour
 {
+
+    enum Mode
+    {
+        Idle,
+        Walk,
+    }
+
 
     public float speed = 2;
     public LayerMask layerMask;
     private CharacterController pawn;
-    public float walkSpeed = 5;
+    public float walkSpeed = 1;
+    public bool leftclick = false;
+
+    //falling
+    float velocityY = 0;
+    public float gravity = 40;
+
+    private Quaternion targetRotation;
+    private Mode mode = Mode.Idle;
+    private Vector3 input;
+    public float turnRate;
+
+    private Camera cam;
 
     private Animator animator;
 
-    [Range (0, 1f)]
+    [Range(0, 1f)]
     public float DistanceToGround;
 
 
@@ -21,69 +40,72 @@ public class GuyMovement : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         pawn = GetComponent<CharacterController>();
+        cam = Camera.main;
     }
 
     void Update()
     {
+        //Upon releasing WADS keys, imput goes from 1 to 0, resetting rotation?
         float v = Input.GetAxis("Vertical");
         float h = Input.GetAxis("Horizontal");
 
-        Vector3 move = transform.forward * v + transform.right * h;
+        Vector3 camForward = cam.transform.forward;
+        camForward.y = 0;
+        camForward.Normalize();
+        Vector3 camRight = Vector3.Cross(Vector3.up, camForward);
 
-        if (move.sqrMagnitude > 1) move.Normalize();
-        pawn.SimpleMove(move * speed);
+        float threshold = .1f;
+
+        input = camForward * v + camRight * h;
+
+        mode = (input.sqrMagnitude > threshold * threshold) ? Mode.Walk : Mode.Idle;
+
+        // this makes his body turn
+        // this bit of code seems to also be a culprit
+        if (mode == Mode.Walk) targetRotation = Quaternion.LookRotation(input, Vector3.up);
+
+        Vector2 getAxis = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        transform.Rotate(getAxis.x * turnRate * Time.deltaTime, getAxis.y * turnRate * Time.deltaTime, 0, Space.Self);
+        
+
+
+        if (input.sqrMagnitude > 1) input.Normalize();
+        pawn.SimpleMove(input * speed);
 
         transform.position += transform.forward * v * Time.deltaTime * walkSpeed;
         transform.position += transform.right * h * Time.deltaTime * walkSpeed;
+
+        //Switch to walking
         animator.SetFloat("speed", Mathf.Abs(v * walkSpeed));
 
-    }
-    private void OnAnimatorIK(int layerIndex)
-    {
-        if (animator)
+        if (walkSpeed >= .3f)
         {
-            // This applies the ability to move the foot in the animator tab. 0 means not at all, 1 means all
-            animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, animator.GetFloat("IKLeftFootWeight"));
-            animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, animator.GetFloat("IKLeftFootWeight"));
-            animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, animator.GetFloat("IKRightFootWeight"));
-            animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, animator.GetFloat("IKRightFootWeight"));
-
-            //Applying the actual movement to the left foot
-            RaycastHit hit;
-            Ray ray = new Ray(animator.GetIKPosition(AvatarIKGoal.LeftFoot) + Vector3.up, Vector3.down);
-            if (Physics.Raycast(ray, out hit, DistanceToGround +1f, layerMask)) // the "1" value may change if the leg is bent a certain way in the idle
-            {
-                if (hit.transform.tag == "Walkable")
-                {
-                    Vector3 footPosition = hit.point; //hit.point is where the raycast hits
-                    footPosition.y += DistanceToGround;
-                    animator.SetIKPosition(AvatarIKGoal.LeftFoot, footPosition);
-                    Vector3 forward = Vector3.ProjectOnPlane(transform.forward, hit.normal);
-                    animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.LookRotation(forward, hit.normal));
-                    //animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.LookRotation(transform.forward, hit.normal));
-                }
-
-
-
-                // This applies the ability to move the foot in the animator tab. 0 means not at all, 1 means all
-
-                //Now the movement of the right foot
-                 ray = new Ray(animator.GetIKPosition(AvatarIKGoal.RightFoot) + Vector3.up, Vector3.down);
-                if (Physics.Raycast(ray, out hit, DistanceToGround + 1f, layerMask)) // the "1" value may change if the leg is bent a certain way in the idle
-                {
-                    if (hit.transform.tag == "Walkable")
-                    {
-                        Vector3 footPosition = hit.point; //hit.point is where the raycast hits
-                        footPosition.y += DistanceToGround;
-                        animator.SetIKPosition(AvatarIKGoal.RightFoot, footPosition);
-                        Vector3 forward = Vector3.ProjectOnPlane(transform.forward, hit.normal);
-                        animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.LookRotation(forward, hit.normal));
-                        //animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.LookRotation(transform.forward, hit.normal));
-                    }
-                }
-
-            }
-
+            mode = Mode.Walk;
+        }
+        else
+        {
+            mode = Mode.Idle;
+        }
+        AnimateStates();
+        velocityY += gravity * Time.deltaTime;
+        if (pawn.isGrounded)
+        {
+            velocityY = 0;
         }
     }
+
+    void AnimateStates()
+    {
+        transform.rotation = AnimMath.Ease(transform.rotation, targetRotation, .01f);
+
+        switch(mode)
+        {
+            case Mode.Idle:
+                break;
+            case Mode.Walk:
+                break;
+        }
+    }
+
 }
