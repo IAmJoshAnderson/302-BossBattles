@@ -31,4 +31,14 @@ public class HealthGunGuy : MonoBehaviour
 
         healthBar.SetHealth(currentHealth);
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+            Debug.Log(collision.collider.name);
+       
+        //if (collision.collider.tag == "CubeBoss")
+        //{
+        //Debug.Log("Ouch!");
+        //TakeDamage(5);
+        //}
+    }
 }

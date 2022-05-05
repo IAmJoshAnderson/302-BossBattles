@@ -68,7 +68,7 @@ public class ProjectileGun : MonoBehaviour
         readyToShoot = false;
 
         //Find exact position using raycast
-        Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); // this ray follows the camera, when that's not the correct one.
         RaycastHit hit;
 
         //check if ray hits something

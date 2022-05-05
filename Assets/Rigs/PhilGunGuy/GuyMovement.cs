@@ -14,10 +14,8 @@ public class GuyMovement : MonoBehaviour
 
 
     public float speed = 2;
-    public LayerMask layerMask;
     private CharacterController pawn;
     public float walkSpeed = 1;
-    public bool leftclick = false;
 
     //falling
     float velocityY = 0;
@@ -31,10 +29,6 @@ public class GuyMovement : MonoBehaviour
     private Camera cam;
 
     private Animator animator;
-
-    [Range(0, 1f)]
-    public float DistanceToGround;
-
 
     void Start()
     {
@@ -107,5 +101,4 @@ public class GuyMovement : MonoBehaviour
                 break;
         }
     }
-
 }

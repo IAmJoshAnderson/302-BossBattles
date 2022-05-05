@@ -23,15 +23,6 @@ public class Health : MonoBehaviour
     void Update()
     {
         healthBar.value = CalculateHealth();
-
-        if (health < maxHealth)
-        {
-            healthBarUI.SetActive(true);
-        }
-        else
-        {
-            healthBarUI.SetActive(false);
-        }
         if (health <= 0)
         {
             // Input Death animation
