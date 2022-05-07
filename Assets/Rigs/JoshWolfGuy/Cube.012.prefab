@@ -462,7 +462,7 @@ CharacterController:
   m_GameObject: {fileID: 1878758051399350138}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Height: 1.6
   m_Radius: 0.5
@@ -584,8 +584,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8ce58d75fda1344f8d5d9cf19b09225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1000
-  currentHealth: 0
+  maxHealth: 100
+  health: 0
   healthBarUI: {fileID: 0}
   healthBar: {fileID: 0}
 --- !u!65 &6638841503726264223

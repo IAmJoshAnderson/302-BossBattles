@@ -25,6 +25,9 @@ public class CubeMovement : MonoBehaviour
     public float radius;
     [Range (0, 360)]
     public float angle;
+    private bool isJumping; // keep track of the jumping state
+    [Range (0, 10)]
+    public float heightLimit; // the height of which the cube goes up, max 10
 
     public LayerMask targetMask;
     public LayerMask obstructionMask;
@@ -32,10 +35,12 @@ public class CubeMovement : MonoBehaviour
     public float speed; // the speed at which the slime moves during its jump
     private Quaternion targetRotation;
     private Mode mode = Mode.Idle;
+    private CharacterController pawn;
 
     // CanAttack
     public bool canSeePlayer;
 
+    private float gravity = 40;
 
     // Start is called before the first frame update
     private void Start()
@@ -43,6 +48,7 @@ public class CubeMovement : MonoBehaviour
 
         bossAnimations = GetComponent<Animator>();
         StartCoroutine(FOVRoutine());
+        pawn = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -96,9 +102,10 @@ public class CubeMovement : MonoBehaviour
 
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                 {
+                    if (isJumping != true)
                     canSeePlayer = true;
                     bossAnimations.SetBool("Proximity", true); // canSeePlayer and Proximity are the same
-                    bossAnimations.SetBool("Jump", false);
+                    
                 }
                 else // this should be when the slime jumps to the player!
                 {
@@ -116,11 +123,25 @@ public class CubeMovement : MonoBehaviour
         {
             canSeePlayer = false;
             bossAnimations.SetBool("Proximity", false);
+            // now we are jumping, not in proximity
+            isJumping = true;
             bossAnimations.SetBool("Jump", true);
+        }
+        if (isJumping == true)
+        {
             Vector3 a = transform.position;
             Vector3 b = playerHeight.position;
-            transform.position = Vector3.MoveTowards(a, b, speed);
-
+            if (a.y <= heightLimit)
+            transform.position = Vector3.Lerp(a, b, Mathf.SmoothStep(0, 1, speed));
+            if (a.y >= heightLimit)
+            {
+                isJumping = false;
+                bossAnimations.SetBool("Jump", false);
+            }
         }
+    }
+    void Attract()
+    {
+
     }
 }

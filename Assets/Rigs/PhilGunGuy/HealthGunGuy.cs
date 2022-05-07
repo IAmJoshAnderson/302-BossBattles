@@ -10,6 +10,8 @@ public class HealthGunGuy : MonoBehaviour
 
     public HealthBar healthBar;
 
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,9 @@ public class HealthGunGuy : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(10);
+            //animator.SetBool("Hit", true);
+            //if (currentHealth <= 0)
+            //animator.SetBool("Death", true);
         }
     }
     void TakeDamage(int damage)
@@ -34,11 +39,5 @@ public class HealthGunGuy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
             Debug.Log(collision.collider.name);
-       
-        //if (collision.collider.tag == "CubeBoss")
-        //{
-        //Debug.Log("Ouch!");
-        //TakeDamage(5);
-        //}
     }
 }
